@@ -1,0 +1,20 @@
+{
+  "name": "Seven 的彩虹成长岛",
+  "short_name": "Seven成长岛",
+  "description": "适合幼儿的每日趣味学习、动画和打卡网站",
+  "lang": "zh-CN",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#fffaf0",
+  "theme_color": "#ff7657",
+  "icons": [
+    {
+      "src": "island-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

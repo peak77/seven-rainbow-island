@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Seven 的每日趣味学习打卡网站，包含英语、语文、数学、科学、创意和生活习惯。"
+    />
+    <meta name="theme-color" content="#ff835c" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Seven成长岛" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <title>Seven 的彩虹成长岛</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" href="island-icon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#daily-tasks">跳到今日任务</a>
+
+    <div class="sky-decor" aria-hidden="true">
+      <span class="cloud cloud-one"></span>
+      <span class="cloud cloud-two"></span>
+      <span class="sun"><i></i></span>
+      <span class="floating-shape shape-a">★</span>
+      <span class="floating-shape shape-b">●</span>
+      <span class="floating-shape shape-c">✦</span>
+    </div>
+
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="返回顶部">
+        <span class="brand-mark" aria-hidden="true">
+          <span class="brand-face">•ᴗ•</span>
+        </span>
+        <span>
+          <strong>Seven 的</strong>
+          <small>彩虹成长岛</small>
+        </span>
+      </a>
+
+      <div class="header-actions">
+        <span class="today-label" id="today-label"></span>
+        <button class="round-button sound-toggle" id="sound-toggle" type="button" aria-label="关闭声音" aria-pressed="true">
+          <span aria-hidden="true">♫</span>
+        </button>
+        <button class="round-button share-toggle" id="share-button" type="button" aria-label="分享网站">
+          <span aria-hidden="true">↗</span>
+        </button>
+        <button class="parent-button" id="parent-button" type="button">
+          <span aria-hidden="true">☂</span>
+          家长小屋
+        </button>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <div class="eyebrow"><span></span> 今天也要开心长大</div>
+          <h1 id="hero-title">
+            Seven，出发吧！<br />
+            <em>今天想探索什么？</em>
+          </h1>
+          <p>玩中学，学中玩。完成任意 4 个小任务，就能点亮今天的小彩虹！</p>
+
+          <div class="hero-actions">
+            <a class="primary-action" href="#daily-tasks">
+              开始今日冒险
+              <span aria-hidden="true">→</span>
+            </a>
+            <div class="streak-pill">
+              <span class="flame" aria-hidden="true">●</span>
+              <span><strong id="streak-count">0</strong> 天连续打卡</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-label="小岛探险家插画">
+          <div class="rainbow" aria-hidden="true">
+            <i></i><i></i><i></i>
+          </div>
+          <div class="mascot" aria-hidden="true">
+            <div class="mascot-ear left"></div>
+            <div class="mascot-ear right"></div>
+            <div class="mascot-head">
+              <span class="eye left"></span>
+              <span class="eye right"></span>
+              <span class="nose"></span>
+              <span class="smile"></span>
+              <span class="cheek left"></span>
+              <span class="cheek right"></span>
+            </div>
+            <div class="mascot-body">
+              <span class="badge">7</span>
+            </div>
+            <div class="mascot-arm left"></div>
+            <div class="mascot-arm right"></div>
+          </div>
+          <div class="island" aria-hidden="true">
+            <span class="flower flower-one">✿</span>
+            <span class="flower flower-two">✿</span>
+            <span class="tiny-tree"><i></i></span>
+          </div>
+          <span class="speech-bubble">准备好啦！</span>
+        </div>
+
+        <div class="progress-card">
+          <div class="progress-ring" id="progress-ring" style="--progress: 0deg">
+            <div>
+              <strong id="progress-count">0</strong>
+              <span>/ 6</span>
+            </div>
+          </div>
+          <div class="progress-copy">
+            <span>今日进度</span>
+            <strong id="progress-message">第一颗星星在等你</strong>
+          </div>
+          <div class="star-bank" title="今日获得的星星">
+            <span aria-hidden="true">★</span>
+            <strong id="star-count">0</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="theater-section" id="little-theater" aria-labelledby="theater-title">
+        <div class="theater-heading">
+          <div>
+            <span class="section-kicker">SEVEN'S LITTLE CINEMA</span>
+            <h2 id="theater-title">动画小剧场</h2>
+            <p>短短一小集，眼睛看看、耳朵听听，再和爸爸妈妈说一说。</p>
+          </div>
+          <div class="theater-ticket" aria-label="今日看完的视频数量">
+            <span aria-hidden="true">▶</span>
+            <div>
+              <small>今日小放映员</small>
+              <strong><b id="video-watch-count">0</b> / 4 集</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="video-grid" id="video-grid" aria-live="polite"></div>
+
+        <div class="screen-time-note">
+          <span aria-hidden="true">👀</span>
+          <p><strong>护眼小提醒：</strong>每看完一集，望一望窗外，眨眨眼睛，再决定要不要看下一集。</p>
+        </div>
+      </section>
+
+      <section class="bilibili-section" id="curated-video-classroom" aria-labelledby="bilibili-title">
+        <div class="bilibili-heading">
+          <div class="bilibili-logo" aria-hidden="true">小电视</div>
+          <div>
+            <span class="section-kicker">AD-FREE REAL WORLD</span>
+            <h2 id="bilibili-title">无广告真实世界视频</h2>
+            <p>看看种子、月亮、云朵和小昆虫。直接播放开放授权视频文件，不经过广告平台。</p>
+          </div>
+          <button class="bilibili-parent-entry" id="bilibili-parent-entry" type="button">
+            <span aria-hidden="true">＋</span> 家长添加视频
+          </button>
+        </div>
+        <div class="bilibili-safety-note">
+          <span aria-hidden="true">🛡️</span>
+          <p><strong>儿童观看模式：</strong>预置视频来自 Wikimedia Commons、NASA 等开放来源，没有贴片广告、自动推荐或跳转；家长自行添加的 B 站内容仍需陪同观看。</p>
+        </div>
+        <div class="video-library-toolbar">
+          <label class="video-library-search">
+            <span aria-hidden="true">⌕</span>
+            <input id="video-library-search" type="search" placeholder="搜索视频名称或内容" autocomplete="off" />
+          </label>
+          <label>
+            <span class="sr-only">按语言筛选</span>
+            <select id="video-language-filter">
+              <option value="all">全部语言</option>
+              <option value="中文">中文</option>
+              <option value="英语">英语</option>
+              <option value="中英双语">中英双语</option>
+              <option value="日语">日语</option>
+              <option value="西班牙语">西班牙语</option>
+              <option value="法语">法语</option>
+              <option value="德语">德语</option>
+              <option value="其他">其他语言</option>
+            </select>
+          </label>
+          <label>
+            <span class="sr-only">按学科筛选</span>
+            <select id="video-subject-filter">
+              <option value="all">全部学科</option>
+              <option value="英语">英语</option>
+              <option value="语文">语文</option>
+              <option value="数学">数学</option>
+              <option value="科学">科学</option>
+              <option value="音乐">音乐</option>
+              <option value="运动">运动</option>
+              <option value="综合">综合</option>
+            </select>
+          </label>
+          <span class="video-library-count" id="video-library-count">0 个视频</span>
+        </div>
+        <div class="bilibili-grid" id="bilibili-grid" aria-live="polite"></div>
+      </section>
+
+      <section class="task-section" id="daily-tasks" aria-labelledby="task-title">
+        <div class="section-heading">
+          <div>
+            <span class="section-kicker">TODAY'S ADVENTURE</span>
+            <h2 id="task-title">今天的六座小岛</h2>
+          </div>
+          <p>每次 3–5 分钟，点一点、听一听、动一动。</p>
+        </div>
+
+        <div class="task-grid" id="task-grid" aria-live="polite"></div>
+
+        <div class="checkin-panel" id="checkin-panel">
+          <div class="checkin-icon" aria-hidden="true">✓</div>
+          <div>
+            <span>每日小目标</span>
+            <strong id="checkin-title">再完成 4 个任务，就能打卡啦！</strong>
+          </div>
+          <button class="checkin-button" id="checkin-button" type="button" disabled>
+            <span aria-hidden="true">★</span>
+            完成今日打卡
+          </button>
+        </div>
+      </section>
+
+      <section class="week-section" aria-labelledby="week-title">
+        <div class="section-heading compact">
+          <div>
+            <span class="section-kicker">LITTLE STEPS, BIG GROWTH</span>
+            <h2 id="week-title">Seven 的成长脚印</h2>
+          </div>
+          <p>不比快慢，每天进步一点点。</p>
+        </div>
+
+        <div class="growth-board">
+          <div class="week-calendar" id="week-calendar"></div>
+          <div class="growth-note">
+            <div class="note-pin" aria-hidden="true"></div>
+            <span>本周小约定</span>
+            <strong>认真玩，勇敢问，开心笑！</strong>
+            <p>爸爸妈妈的陪伴，比答对更重要。</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-mascot" aria-hidden="true">•ᴗ•</div>
+      <p>给 Seven 的小小成长礼物 <span>♥</span></p>
+      <button id="privacy-button" type="button">数据只保存在这台设备</button>
+    </footer>
+
+    <dialog class="bilibili-dialog" id="bilibili-dialog" aria-labelledby="bilibili-dialog-title">
+      <div class="bilibili-dialog-shell">
+        <button class="dialog-close bilibili-dialog-close" id="bilibili-dialog-close" type="button" aria-label="关闭 B 站视频">×</button>
+        <div class="bilibili-dialog-label"><span aria-hidden="true">▶</span> 家长精选 · Bilibili</div>
+        <h2 id="bilibili-dialog-title">学习视频</h2>
+        <div class="bilibili-frame-wrap">
+          <iframe
+            id="bilibili-frame"
+            title="B站学习视频播放器"
+            src="about:blank"
+            loading="lazy"
+            scrolling="no"
+            frameborder="0"
+            allow="fullscreen; picture-in-picture"
+            sandbox="allow-scripts allow-same-origin allow-presentation"
+            referrerpolicy="no-referrer"
+          ></iframe>
+        </div>
+        <div class="bilibili-dialog-reminder">
+          <span aria-hidden="true">👨‍👩‍👦</span>
+          <p>请家长陪同观看。若播放器出现推广、推荐或不适合幼儿的内容，请立即关闭并从家长小屋移除该视频。</p>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog class="external-video-dialog" id="external-video-dialog" aria-labelledby="external-video-title">
+      <div class="external-video-shell">
+        <button class="dialog-close external-video-close" id="external-video-close" type="button" aria-label="关闭真实世界视频">×</button>
+        <div class="external-video-label"><span aria-hidden="true">✦</span> 无广告 · 开放授权</div>
+        <h2 id="external-video-title">真实世界视频</h2>
+        <p class="external-video-summary" id="external-video-summary"></p>
+        <div class="external-video-frame">
+          <video id="external-video-player" controls playsinline preload="metadata"></video>
+        </div>
+        <div class="external-video-actions">
+          <button id="external-video-narration" type="button"><span aria-hidden="true">🔊</span> 听中文讲解</button>
+          <span id="external-video-duration"></span>
+        </div>
+        <div class="external-video-question">
+          <span aria-hidden="true">💬</span>
+          <p><strong>看完问一问：</strong><span id="external-video-question-text"></span></p>
+        </div>
+        <p class="external-video-credit">
+          视频来源与许可：<a id="external-video-source-link" href="#" target="_blank" rel="noopener noreferrer nofollow"></a>
+          <span id="external-video-license"></span>
+        </p>
+      </div>
+    </dialog>
+
+    <dialog class="video-dialog" id="video-dialog" aria-labelledby="video-dialog-title">
+      <div class="video-dialog-shell">
+        <button class="dialog-close video-dialog-close" id="video-dialog-close" type="button" aria-label="关闭动画小剧场">×</button>
+        <div class="video-dialog-topline">
+          <span id="video-dialog-category"></span>
+          <span class="video-dialog-duration" id="video-dialog-duration"></span>
+        </div>
+        <h2 id="video-dialog-title"></h2>
+        <div class="canvas-screen" id="canvas-screen">
+          <canvas id="video-canvas" width="960" height="540" aria-label="动画画面"></canvas>
+          <button class="canvas-big-play" id="canvas-big-play" type="button" aria-label="播放动画">
+            <span aria-hidden="true">▶</span>
+          </button>
+          <div class="video-caption" id="video-caption" aria-live="polite"></div>
+          <div class="video-finished-badge" id="video-finished-badge" aria-hidden="true">看完啦！</div>
+        </div>
+        <div class="video-controls">
+          <button class="video-control-button" id="video-play-pause" type="button" aria-label="播放">
+            <span aria-hidden="true">▶</span>
+          </button>
+          <label class="video-progress-label">
+            <span class="sr-only">动画进度</span>
+            <input id="video-progress" type="range" min="0" max="1000" value="0" />
+          </label>
+          <span class="video-time" id="video-time">0:00 / 0:00</span>
+          <button class="video-narration-button" id="video-narration-button" type="button" aria-pressed="true">
+            <span aria-hidden="true">🔊</span> 讲解开
+          </button>
+          <button class="video-replay-button" id="video-replay-button" type="button">↻ 重播</button>
+        </div>
+        <div class="video-after-talk">
+          <span aria-hidden="true">💬</span>
+          <p><strong>看完聊一聊：</strong><span id="video-talk-question"></span></p>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog class="activity-dialog" id="activity-dialog" aria-labelledby="activity-title">
+      <div class="dialog-shell">
+        <button class="dialog-close" id="dialog-close" type="button" aria-label="关闭任务">×</button>
+        <div class="dialog-subject" id="dialog-subject"></div>
+        <h2 id="activity-title"></h2>
+        <p class="activity-instruction" id="activity-instruction"></p>
+        <div class="activity-stage" id="activity-stage"></div>
+        <p class="activity-feedback" id="activity-feedback" role="status" aria-live="polite"></p>
+        <div class="dialog-actions">
+          <button class="secondary-action" id="activity-hint" type="button">给我一点提示</button>
+          <button class="primary-dialog-action" id="activity-finish" type="button" disabled>完成任务</button>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog class="parent-dialog" id="parent-dialog" aria-labelledby="parent-title">
+      <div class="parent-shell">
+        <button class="dialog-close" id="parent-close" type="button" aria-label="关闭家长小屋">×</button>
+        <span class="section-kicker">FOR GROWN-UPS</span>
+        <h2 id="parent-title">家长小屋</h2>
+        <p class="parent-intro">这里关注的是兴趣和习惯，不是分数。建议每天由孩子自主选择任务，家长只在需要时帮忙。</p>
+        <div class="parent-stats">
+          <div><span>连续打卡</span><strong id="parent-streak">0 天</strong></div>
+          <div><span>累计星星</span><strong id="parent-stars">0 颗</strong></div>
+          <div><span>今日完成</span><strong id="parent-today">0 / 6</strong></div>
+          <div><span>今日小视频</span><strong id="parent-videos">0 / 9</strong></div>
+        </div>
+        <div class="parent-tip">
+          <span aria-hidden="true">☀</span>
+          <div>
+            <strong>今日陪伴提示</strong>
+            <p id="parent-tip-text"></p>
+          </div>
+        </div>
+
+        <section class="parent-tool-section share-device-section" aria-labelledby="share-device-title">
+          <div class="parent-tool-heading">
+            <span aria-hidden="true">📱</span>
+            <div>
+              <h3 id="share-device-title">在手机和 iPad 上打开</h3>
+              <p id="device-access-status">正在检查访问方式…</p>
+            </div>
+          </div>
+          <div class="device-url-row">
+            <code id="device-url">—</code>
+            <button id="copy-device-url" type="button">复制网址</button>
+            <button id="share-device-url" type="button">分享</button>
+          </div>
+          <p class="home-screen-tip">iPhone / iPad：用 Safari 打开网址，点击“分享”→“添加到主屏幕”，以后就像 App 一样进入。</p>
+        </section>
+
+        <section class="parent-tool-section bilibili-manager" aria-labelledby="bilibili-manager-title">
+          <div class="parent-tool-heading">
+            <span aria-hidden="true">📺</span>
+            <div>
+              <h3 id="bilibili-manager-title">管理 B 站视频课</h3>
+              <p>仅添加已经由家长完整看过、确认无广告植入且适龄的视频。</p>
+            </div>
+          </div>
+          <div class="bilibili-add-form">
+            <label>
+              视频名称
+              <input id="bilibili-title-input" type="text" maxlength="30" placeholder="例如：认识身体部位" />
+            </label>
+            <label>
+              B站视频链接或 BV 号
+              <input id="bilibili-url-input" type="text" inputmode="url" placeholder="https://www.bilibili.com/video/BV…" />
+            </label>
+            <label>
+              学习分类
+              <select id="bilibili-category-input">
+                <option value="英语">英语</option>
+                <option value="语文">语文</option>
+                <option value="数学">数学</option>
+                <option value="科学">科学</option>
+                <option value="音乐">音乐</option>
+                <option value="运动">运动</option>
+                <option value="综合">综合</option>
+              </select>
+            </label>
+            <label>
+              视频语言
+              <select id="bilibili-language-input">
+                <option value="中文">中文</option>
+                <option value="英语">英语</option>
+                <option value="中英双语">中英双语</option>
+                <option value="日语">日语</option>
+                <option value="西班牙语">西班牙语</option>
+                <option value="法语">法语</option>
+                <option value="德语">德语</option>
+                <option value="其他">其他语言</option>
+              </select>
+            </label>
+            <button id="add-bilibili-video" type="button">审核完成，添加视频</button>
+          </div>
+          <p class="bilibili-form-feedback" id="bilibili-form-feedback" role="status" aria-live="polite"></p>
+          <div class="bilibili-manage-list" id="bilibili-manage-list"></div>
+        </section>
+
+        <div class="parent-controls">
+          <label>
+            宝宝称呼
+            <input id="child-name-input" type="text" value="Seven" maxlength="12" />
+          </label>
+          <button id="save-name" type="button">保存称呼</button>
+          <button class="danger-button" id="reset-today" type="button">重新开始今天</button>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog class="celebration-dialog" id="celebration-dialog" aria-labelledby="celebration-title">
+      <div class="celebration-shell">
+        <div class="celebration-stars" aria-hidden="true">★ ✦ ★</div>
+        <div class="big-rainbow" aria-hidden="true"><i></i><i></i><i></i></div>
+        <h2 id="celebration-title">小彩虹点亮啦！</h2>
+        <p><strong id="celebration-name">Seven</strong> 今天认真探索、勇敢尝试，真棒！</p>
+        <button id="celebration-close" type="button">收下今天的小红花</button>
+      </div>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <div class="confetti-layer" id="confetti-layer" aria-hidden="true"></div>
+
+    <script src="lan-config.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
