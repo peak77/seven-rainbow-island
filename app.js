@@ -720,7 +720,27 @@ function bindEvents() {
       openBilibiliVideo(playButton.dataset.bilibiliId);
       return;
     }
+    if (event.target.closest("[data-load-more-videos]")) {
+      videoLibraryLimit += 12;
+      renderBilibiliVideos();
+      return;
+    }
     if (event.target.closest("[data-open-bilibili-parent]")) openBilibiliManager();
+  });
+  elements.videoLibrarySearch.addEventListener("input", () => {
+    videoLibraryFilters.query = elements.videoLibrarySearch.value;
+    videoLibraryLimit = 12;
+    renderBilibiliVideos();
+  });
+  elements.videoLanguageFilter.addEventListener("change", () => {
+    videoLibraryFilters.language = elements.videoLanguageFilter.value;
+    videoLibraryLimit = 12;
+    renderBilibiliVideos();
+  });
+  elements.videoSubjectFilter.addEventListener("change", () => {
+    videoLibraryFilters.subject = elements.videoSubjectFilter.value;
+    videoLibraryLimit = 12;
+    renderBilibiliVideos();
   });
   elements.bilibiliParentEntry.addEventListener("click", openBilibiliManager);
   elements.bilibiliDialogClose.addEventListener("click", closeBilibiliVideo);
@@ -825,6 +845,7 @@ function addBilibiliVideo() {
   const title = elements.bilibiliTitleInput.value.trim();
   const source = elements.bilibiliUrlInput.value.trim();
   const category = elements.bilibiliCategoryInput.value;
+  const language = elements.bilibiliLanguageInput.value;
   const bvid = extractBvid(source);
 
   if (!title) {
@@ -845,6 +866,7 @@ function addBilibiliVideo() {
     bvid,
     title: title.slice(0, 30),
     category,
+    language,
     addedAt: new Date().toISOString(),
   });
   saveState();
