@@ -55,3 +55,7 @@ python3 -m http.server 8000
 ## 数据说明
 
 不同手机和 iPad 的打卡记录分别保存在各自浏览器中，目前不会跨设备同步。
+
+## 公开部署
+
+双击 `deploy-github.command` 可创建或更新公开 GitHub 仓库，并使用 `main` 分支根目录直接发布 GitHub Pages。此方式不需要 GitHub OAuth 的 `workflow` 权限。

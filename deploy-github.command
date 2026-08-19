@@ -21,8 +21,18 @@ if [ ! -d .git ]; then
   git init -b main
 fi
 
-git add .
-if ! git diff --cached --quiet; then
+git add -A
+
+# The first push may have been rejected because the original commit contained
+# a workflow file but the OAuth token did not have the broad `workflow` scope.
+# The remote is still empty in that case, so replace the unpublished root
+# commit with the safer branch-based Pages configuration.
+if [ "$(git rev-list --count HEAD 2>/dev/null || echo 0)" -eq 1 ] \
+  && git show --name-only --format= HEAD | grep -qx ".github/workflows/deploy-pages.yml"; then
+  git -c user.name="$GITHUB_OWNER" \
+    -c user.email="$GITHUB_OWNER@users.noreply.github.com" \
+    commit --amend --no-edit
+elif ! git diff --cached --quiet; then
   git -c user.name="$GITHUB_OWNER" \
     -c user.email="$GITHUB_OWNER@users.noreply.github.com" \
     commit -m "Publish Seven learning island"
@@ -42,10 +52,16 @@ else
     --push
 fi
 
-gh api -X POST "repos/$GITHUB_OWNER/$REPOSITORY_NAME/pages" \
-  -f build_type=workflow >/dev/null 2>&1 || true
-
-gh workflow run deploy-pages.yml --repo "$GITHUB_OWNER/$REPOSITORY_NAME" >/dev/null 2>&1 || true
+echo "正在启用 GitHub Pages…"
+if gh api "repos/$GITHUB_OWNER/$REPOSITORY_NAME/pages" >/dev/null 2>&1; then
+  gh api -X PUT "repos/$GITHUB_OWNER/$REPOSITORY_NAME/pages" \
+    -f 'source[branch]=main' \
+    -f 'source[path]=/' >/dev/null
+else
+  gh api -X POST "repos/$GITHUB_OWNER/$REPOSITORY_NAME/pages" \
+    -f 'source[branch]=main' \
+    -f 'source[path]=/' >/dev/null
+fi
 
 PUBLIC_URL="https://$GITHUB_OWNER.github.io/$REPOSITORY_NAME/"
 echo ""
