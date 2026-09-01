@@ -2,7 +2,7 @@
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta
       name="description"
       content="Seven 的每日趣味学习打卡网站，包含英语、语文、数学、科学、创意和生活习惯。"
@@ -12,9 +12,11 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="Seven成长岛" />
     <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="referrer" content="no-referrer" />
     <title>Seven 的彩虹成长岛</title>
     <link rel="manifest" href="manifest.webmanifest" />
     <link rel="icon" href="island-icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="assets/icons/island-192.png" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -45,10 +47,10 @@
         <button class="round-button sound-toggle" id="sound-toggle" type="button" aria-label="关闭声音" aria-pressed="true">
           <span aria-hidden="true">♫</span>
         </button>
-        <button class="round-button share-toggle" id="share-button" type="button" aria-label="分享网站">
+        <button class="round-button share-toggle parent-only-control" id="share-button" type="button" aria-label="分享网站">
           <span aria-hidden="true">↗</span>
         </button>
-        <button class="parent-button" id="parent-button" type="button">
+        <button class="parent-button" id="parent-button" type="button" aria-haspopup="dialog">
           <span aria-hidden="true">☂</span>
           家长小屋
         </button>
@@ -110,7 +112,7 @@
           <div class="progress-ring" id="progress-ring" style="--progress: 0deg">
             <div>
               <strong id="progress-count">0</strong>
-              <span>/ 6</span>
+              <span>/ <b id="progress-total">7</b></span>
             </div>
           </div>
           <div class="progress-copy">
@@ -124,93 +126,26 @@
         </div>
       </section>
 
-      <section class="theater-section" id="little-theater" aria-labelledby="theater-title">
-        <div class="theater-heading">
-          <div>
-            <span class="section-kicker">SEVEN'S LITTLE CINEMA</span>
-            <h2 id="theater-title">动画小剧场</h2>
-            <p>短短一小集，眼睛看看、耳朵听听，再和爸爸妈妈说一说。</p>
-          </div>
-          <div class="theater-ticket" aria-label="今日看完的视频数量">
-            <span aria-hidden="true">▶</span>
-            <div>
-              <small>今日小放映员</small>
-              <strong><b id="video-watch-count">0</b> / 4 集</strong>
-            </div>
-          </div>
-        </div>
-
-        <div class="video-grid" id="video-grid" aria-live="polite"></div>
-
-        <div class="screen-time-note">
-          <span aria-hidden="true">👀</span>
-          <p><strong>护眼小提醒：</strong>每看完一集，望一望窗外，眨眨眼睛，再决定要不要看下一集。</p>
-        </div>
-      </section>
-
-      <section class="bilibili-section" id="curated-video-classroom" aria-labelledby="bilibili-title">
-        <div class="bilibili-heading">
-          <div class="bilibili-logo" aria-hidden="true">小电视</div>
-          <div>
-            <span class="section-kicker">AD-FREE REAL WORLD</span>
-            <h2 id="bilibili-title">无广告真实世界视频</h2>
-            <p>看看种子、月亮、云朵和小昆虫。直接播放开放授权视频文件，不经过广告平台。</p>
-          </div>
-          <button class="bilibili-parent-entry" id="bilibili-parent-entry" type="button">
-            <span aria-hidden="true">＋</span> 家长添加视频
-          </button>
-        </div>
-        <div class="bilibili-safety-note">
-          <span aria-hidden="true">🛡️</span>
-          <p><strong>儿童观看模式：</strong>预置视频来自 Wikimedia Commons、NASA 等开放来源，没有贴片广告、自动推荐或跳转；家长自行添加的 B 站内容仍需陪同观看。</p>
-        </div>
-        <div class="video-library-toolbar">
-          <label class="video-library-search">
-            <span aria-hidden="true">⌕</span>
-            <input id="video-library-search" type="search" placeholder="搜索视频名称或内容" autocomplete="off" />
-          </label>
-          <label>
-            <span class="sr-only">按语言筛选</span>
-            <select id="video-language-filter">
-              <option value="all">全部语言</option>
-              <option value="中文">中文</option>
-              <option value="英语">英语</option>
-              <option value="中英双语">中英双语</option>
-              <option value="日语">日语</option>
-              <option value="西班牙语">西班牙语</option>
-              <option value="法语">法语</option>
-              <option value="德语">德语</option>
-              <option value="其他">其他语言</option>
-            </select>
-          </label>
-          <label>
-            <span class="sr-only">按学科筛选</span>
-            <select id="video-subject-filter">
-              <option value="all">全部学科</option>
-              <option value="英语">英语</option>
-              <option value="语文">语文</option>
-              <option value="数学">数学</option>
-              <option value="科学">科学</option>
-              <option value="音乐">音乐</option>
-              <option value="运动">运动</option>
-              <option value="综合">综合</option>
-            </select>
-          </label>
-          <span class="video-library-count" id="video-library-count">0 个视频</span>
-        </div>
-        <div class="bilibili-grid" id="bilibili-grid" aria-live="polite"></div>
-      </section>
-
       <section class="task-section" id="daily-tasks" aria-labelledby="task-title">
         <div class="section-heading">
           <div>
             <span class="section-kicker">TODAY'S ADVENTURE</span>
-            <h2 id="task-title">今天的六座小岛</h2>
+            <h2 id="task-title">今天的七座小岛</h2>
           </div>
           <p>每次 3–5 分钟，点一点、听一听、动一动。</p>
         </div>
 
-        <div class="task-grid" id="task-grid" aria-live="polite"></div>
+        <div class="today-route-card">
+          <div class="today-route-icon" aria-hidden="true">➜</div>
+          <div>
+            <span>不知道先玩哪个？</span>
+            <strong id="continue-task-title">今天的小任务正在准备</strong>
+          </div>
+          <button id="continue-task-button" type="button">从这里开始</button>
+        </div>
+
+        <div class="task-grid" id="task-grid"></div>
+        <p class="sr-only" id="task-grid-status" role="status" aria-live="polite"></p>
 
         <div class="checkin-panel" id="checkin-panel">
           <div class="checkin-icon" aria-hidden="true">✓</div>
@@ -225,7 +160,95 @@
         </div>
       </section>
 
-      <section class="week-section" aria-labelledby="week-title">
+      <section class="bilibili-section video-hub-section" id="video-playground" aria-labelledby="bilibili-title">
+        <div class="bilibili-heading video-hub-heading">
+          <div class="bilibili-logo" aria-hidden="true">小电视</div>
+          <div>
+            <span class="section-kicker">SEVEN'S VIDEO PLAYGROUND</span>
+            <h2 id="bilibili-title">Seven 视频乐园</h2>
+            <p>原创动画和高清实拍都在这里。先选一集，看完再做一个小动作。</p>
+          </div>
+          <div class="theater-ticket" aria-label="今日看完的视频数量">
+            <span aria-hidden="true">▶</span>
+            <div>
+              <small>今天已经看了</small>
+              <strong><b id="video-watch-count">0</b> 集</strong>
+              <b id="video-total-count" class="sr-only">12</b>
+            </div>
+          </div>
+          <button class="bilibili-parent-entry parent-only-control" id="bilibili-parent-entry" type="button">
+            <span aria-hidden="true">＋</span> 家长添加视频
+          </button>
+        </div>
+        <div class="bilibili-safety-note">
+          <span aria-hidden="true">🛡️</span>
+          <p><strong>儿童安全库：</strong>默认只显示本站原创或开放授权视频，无广告、无需 VPN。家长添加的第三方视频只在家长模式中出现。</p>
+        </div>
+        <div class="video-library-toolbar">
+          <label class="video-library-search parent-only-control">
+            <span aria-hidden="true">⌕</span>
+            <input id="video-library-search" type="search" placeholder="家长搜索视频名称或内容" autocomplete="off" />
+          </label>
+          <label>
+            <span class="video-filter-label">🌍 选择语言</span>
+            <select id="video-language-filter">
+              <option value="all">全部语言</option>
+              <option value="中文">中文</option>
+              <option value="英语">英语</option>
+              <option value="中英双语">中英双语</option>
+              <option value="日语">日语</option>
+              <option value="西班牙语">西班牙语</option>
+              <option value="法语">法语</option>
+              <option value="德语">德语</option>
+              <option value="其他">其他语言</option>
+            </select>
+          </label>
+          <label>
+            <span class="video-filter-label">🏝️ 选择小岛</span>
+            <select id="video-subject-filter">
+              <option value="all">全部学科</option>
+              <option value="英语">英语</option>
+              <option value="语文">语文</option>
+              <option value="数学">数学</option>
+              <option value="科学">科学</option>
+              <option value="音乐">音乐</option>
+              <option value="运动">运动</option>
+              <option value="综合">综合</option>
+            </select>
+          </label>
+          <span class="video-library-count" id="video-library-count">0 个视频</span>
+        </div>
+        <div class="bilibili-grid" id="bilibili-grid"></div>
+        <p class="sr-only" id="video-library-status" role="status" aria-live="polite"></p>
+        <div class="screen-time-note">
+          <span aria-hidden="true">👀</span>
+          <p><strong>护眼小提醒：</strong>看完一集先站起来伸伸手、看看远处，再决定要不要继续。</p>
+        </div>
+      </section>
+
+      <section class="favorite-mission-section" id="hero-missions" aria-labelledby="favorite-mission-title">
+        <div class="favorite-mission-heading">
+          <div>
+            <span class="section-kicker">SEVEN'S HERO MISSIONS</span>
+            <h2 id="favorite-mission-title">英雄任务营</h2>
+            <p>把 Seven 喜欢的英雄故事变成数学、安全和英语小挑战。</p>
+          </div>
+          <div class="favorite-mission-progress" aria-label="今日英雄任务完成数量">
+            <span aria-hidden="true">★</span>
+            <div>
+              <small>今日英雄徽章</small>
+              <strong id="favorite-mission-count">0 / 3</strong>
+            </div>
+          </div>
+        </div>
+        <div class="favorite-mission-note">
+          <span aria-hidden="true">✨</span>
+          <p>这是为 Seven 原创设计的宇宙英雄、安全警犬和迷你行动队任务，不计入每日七科学习进度，可以自由选择。</p>
+        </div>
+        <div class="favorite-mission-grid" id="favorite-mission-grid" aria-live="polite"></div>
+      </section>
+
+      <section class="week-section" id="growth-footprints" aria-labelledby="week-title">
         <div class="section-heading compact">
           <div>
             <span class="section-kicker">LITTLE STEPS, BIG GROWTH</span>
@@ -245,6 +268,12 @@
         </div>
       </section>
     </main>
+
+    <nav class="child-bottom-nav" aria-label="学习岛快捷入口">
+      <a class="is-active" href="#daily-tasks" aria-current="location"><span aria-hidden="true">⭐</span><strong>今日</strong></a>
+      <a href="#video-playground"><span aria-hidden="true">▶</span><strong>视频</strong></a>
+      <a href="#growth-footprints"><span aria-hidden="true">🌈</span><strong>星星</strong></a>
+    </nav>
 
     <footer>
       <div class="footer-mascot" aria-hidden="true">•ᴗ•</div>
@@ -280,19 +309,38 @@
     <dialog class="external-video-dialog" id="external-video-dialog" aria-labelledby="external-video-title">
       <div class="external-video-shell">
         <button class="dialog-close external-video-close" id="external-video-close" type="button" aria-label="关闭真实世界视频">×</button>
-        <div class="external-video-label"><span aria-hidden="true">✦</span> 无广告 · 开放授权</div>
+        <div class="external-video-label"><span aria-hidden="true">✦</span> 高清 · 本站直出 · 无广告</div>
         <h2 id="external-video-title">真实世界视频</h2>
         <p class="external-video-summary" id="external-video-summary"></p>
         <div class="external-video-frame">
           <video id="external-video-player" controls playsinline preload="metadata"></video>
+          <div class="external-video-loading" id="external-video-loading" hidden>
+            <span aria-hidden="true"></span>
+            <strong>正在准备高清画面…</strong>
+          </div>
         </div>
+        <div class="external-video-status-row">
+          <p id="external-video-status" role="status" aria-live="polite">点击播放按钮开始观察。</p>
+          <button id="external-video-retry" type="button" hidden>重新加载</button>
+        </div>
+        <div class="external-video-local-note"><span aria-hidden="true">✓</span> 视频文件由本站直接提供，不需要 VPN，也不会跳到第三方平台。</div>
+        <label class="external-video-language-picker">
+          <span>选择讲解语言</span>
+          <select id="external-video-language" aria-label="选择视频讲解语言"></select>
+        </label>
         <div class="external-video-actions">
           <button id="external-video-narration" type="button"><span aria-hidden="true">🔊</span> 听中文讲解</button>
           <span id="external-video-duration"></span>
         </div>
+        <p class="external-video-transcript" id="external-video-transcript"></p>
         <div class="external-video-question">
           <span aria-hidden="true">💬</span>
           <p><strong>看完问一问：</strong><span id="external-video-question-text"></span></p>
+        </div>
+        <div class="video-complete-action" id="external-video-complete-action" hidden>
+          <span aria-hidden="true">🌟</span>
+          <div><strong>做一个小动作，收下观察徽章</strong><p id="external-video-action-text">把刚才看到的东西讲给爸爸妈妈听。</p></div>
+          <button id="external-video-action-done" type="button">我做到了</button>
         </div>
         <p class="external-video-credit">
           视频来源与许可：<a id="external-video-source-link" href="#" target="_blank" rel="noopener noreferrer nofollow"></a>
@@ -303,14 +351,18 @@
 
     <dialog class="video-dialog" id="video-dialog" aria-labelledby="video-dialog-title">
       <div class="video-dialog-shell">
-        <button class="dialog-close video-dialog-close" id="video-dialog-close" type="button" aria-label="关闭动画小剧场">×</button>
+        <button class="dialog-close video-dialog-close" id="video-dialog-close" type="button" aria-label="关闭原创动画">×</button>
         <div class="video-dialog-topline">
           <span id="video-dialog-category"></span>
           <span class="video-dialog-duration" id="video-dialog-duration"></span>
         </div>
         <h2 id="video-dialog-title"></h2>
+        <label class="canvas-video-language-picker">
+          <span>讲解语言</span>
+          <select id="video-dialog-language" aria-label="选择原创动画讲解语言"></select>
+        </label>
         <div class="canvas-screen" id="canvas-screen">
-          <canvas id="video-canvas" width="960" height="540" aria-label="动画画面"></canvas>
+          <canvas id="video-canvas" width="1280" height="720" aria-label="720P 高清动画画面"></canvas>
           <button class="canvas-big-play" id="canvas-big-play" type="button" aria-label="播放动画">
             <span aria-hidden="true">▶</span>
           </button>
@@ -335,6 +387,11 @@
           <span aria-hidden="true">💬</span>
           <p><strong>看完聊一聊：</strong><span id="video-talk-question"></span></p>
         </div>
+        <div class="video-complete-action" id="canvas-video-complete-action" hidden>
+          <span aria-hidden="true">🌟</span>
+          <div><strong>完成小挑战，再收下视频徽章</strong><p id="canvas-video-action-text">把刚才学到的内容说一遍。</p></div>
+          <button id="canvas-video-action-done" type="button">我做到了</button>
+        </div>
       </div>
     </dialog>
 
@@ -344,6 +401,7 @@
         <div class="dialog-subject" id="dialog-subject"></div>
         <h2 id="activity-title"></h2>
         <p class="activity-instruction" id="activity-instruction"></p>
+        <button class="activity-repeat-button" id="activity-repeat" type="button"><span aria-hidden="true">🔊</span> 再听一遍</button>
         <div class="activity-stage" id="activity-stage"></div>
         <p class="activity-feedback" id="activity-feedback" role="status" aria-live="polite"></p>
         <div class="dialog-actions">
@@ -353,17 +411,36 @@
       </div>
     </dialog>
 
+    <dialog class="parent-gate-dialog" id="parent-gate-dialog" aria-labelledby="parent-gate-title">
+      <div class="parent-gate-shell">
+        <button class="dialog-close" id="parent-gate-close" type="button" aria-label="关闭家长验证">×</button>
+        <div class="parent-gate-icon" aria-hidden="true">☀</div>
+        <span class="section-kicker">GROWN-UPS ONLY</span>
+        <h2 id="parent-gate-title">请家长来一下</h2>
+        <p>为了防止宝宝误改设置，请完成这道家长题。</p>
+        <label>
+          <span id="parent-gate-question">8 + 5 = ?</span>
+          <input id="parent-gate-answer" type="number" inputmode="numeric" autocomplete="off" />
+        </label>
+        <p class="parent-gate-feedback" id="parent-gate-feedback" role="status"></p>
+        <button class="parent-gate-submit" id="parent-gate-submit" type="button">进入家长小屋</button>
+      </div>
+    </dialog>
+
     <dialog class="parent-dialog" id="parent-dialog" aria-labelledby="parent-title">
       <div class="parent-shell">
         <button class="dialog-close" id="parent-close" type="button" aria-label="关闭家长小屋">×</button>
         <span class="section-kicker">FOR GROWN-UPS</span>
-        <h2 id="parent-title">家长小屋</h2>
+        <div class="parent-title-row">
+          <h2 id="parent-title">家长小屋</h2>
+          <button id="exit-parent-mode" type="button">退出家长模式</button>
+        </div>
         <p class="parent-intro">这里关注的是兴趣和习惯，不是分数。建议每天由孩子自主选择任务，家长只在需要时帮忙。</p>
         <div class="parent-stats">
           <div><span>连续打卡</span><strong id="parent-streak">0 天</strong></div>
           <div><span>累计星星</span><strong id="parent-stars">0 颗</strong></div>
-          <div><span>今日完成</span><strong id="parent-today">0 / 6</strong></div>
-          <div><span>今日小视频</span><strong id="parent-videos">0 / 9</strong></div>
+          <div><span>今日完成</span><strong id="parent-today">0 / 7</strong></div>
+          <div><span>今日小视频</span><strong id="parent-videos">0 集</strong></div>
         </div>
         <div class="parent-tip">
           <span aria-hidden="true">☀</span>
@@ -387,6 +464,51 @@
             <button id="share-device-url" type="button">分享</button>
           </div>
           <p class="home-screen-tip">iPhone / iPad：用 Safari 打开网址，点击“分享”→“添加到主屏幕”，以后就像 App 一样进入。</p>
+        </section>
+
+        <section class="parent-tool-section backup-settings" aria-labelledby="backup-settings-title">
+          <div class="parent-tool-heading">
+            <span aria-hidden="true">🧳</span>
+            <div>
+              <h3 id="backup-settings-title">成长记录备份</h3>
+              <p>可以把这台设备的打卡和星星迁移到另一台手机或 iPad。</p>
+            </div>
+          </div>
+          <div class="backup-actions">
+            <button id="export-progress" type="button">导出成长记录</button>
+            <label class="import-progress-label" for="import-progress" role="button" tabindex="0">导入成长记录</label>
+            <input class="sr-only" id="import-progress" type="file" accept="application/json,.json" />
+          </div>
+          <p class="backup-status" id="backup-status" role="status"></p>
+        </section>
+
+        <section class="parent-tool-section voice-settings" aria-labelledby="voice-settings-title">
+          <div class="parent-tool-heading">
+            <span aria-hidden="true">🎙️</span>
+            <div>
+              <h3 id="voice-settings-title">温柔自然女声</h3>
+              <p>动画讲解、视频旁白和答题鼓励会优先使用当前设备上接近真人的女性声音。</p>
+            </div>
+          </div>
+          <div class="voice-setting-grid">
+            <label>
+              讲解风格
+              <select id="voice-style-select">
+                <option value="gentle">温柔女声（推荐）</option>
+                <option value="captain">活力小队长</option>
+                <option value="teacher">清晰小老师</option>
+              </select>
+            </label>
+            <label>
+              中文声音
+              <select id="voice-select">
+                <option value="">自动选择温柔自然女声</option>
+              </select>
+            </label>
+            <button id="voice-preview" type="button"><span aria-hidden="true">▶</span> 试听</button>
+          </div>
+          <p class="voice-status" id="voice-status" role="status">正在读取这台设备上的自然语音…</p>
+          <p class="voice-device-tip">提示：系统会避开明显的男性声音，优先选择自然女声。声音来自手机、iPad 或电脑自带的语音库，因此每台设备的效果可能不同。</p>
         </section>
 
         <section class="parent-tool-section bilibili-manager" aria-labelledby="bilibili-manager-title">
@@ -462,6 +584,8 @@
     <div class="confetti-layer" id="confetti-layer" aria-hidden="true"></div>
 
     <script src="lan-config.js"></script>
+    <script src="content-data.js"></script>
+    <script src="video-language-data.js"></script>
     <script src="app.js"></script>
   </body>
 </html>

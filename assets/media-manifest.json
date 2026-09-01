@@ -1,0 +1,172 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-01",
+  "purpose": "Seven 学习岛本地视频、海报和双语字幕的兼容资源清单",
+  "delivery": {
+    "sameOrigin": true,
+    "thirdPartyPlayerRequired": false,
+    "adsInjectedByThisSite": false,
+    "vpnRequired": false
+  },
+  "mp4Compatibility": {
+    "generated": true,
+    "target": "MP4 container, H.264 video, AAC audio when a source audio track exists, yuv420p, fast-start",
+    "tool": "ffmpeg 9.0.1 with libx264 and AAC",
+    "command": "ffmpeg -i INPUT.webm -map 0:v:0 -map 0:a? -sn -dn -map_metadata -1 -vf fps=30,format=yuv420p -c:v libx264 -preset medium -crf 23 -profile:v high -level:v 4.1 -c:a aac -b:a 128k -movflags +faststart -write_tmcd 0 OUTPUT.mp4",
+    "verificationCommand": "ffprobe -v error -show_entries format=format_name,duration:stream=codec_name,codec_type,width,height,pix_fmt -of json OUTPUT.mp4"
+  },
+  "posterGeneration": {
+    "captureTimeSeconds": 4,
+    "captureMethod": "Google Chrome headless decoded the local WebM frame; cwebp resized it to 960x540 at quality 76",
+    "format": "image/webp",
+    "width": 960,
+    "height": 540
+  },
+  "items": [
+    {
+      "id": "beetle-leaf",
+      "source": "videos/beetle-leaf-1080p.webm",
+      "sourceBytes": 2753079,
+      "sourceSha256": "550080aaf338998f5cbb3d23919e414181b00dd17fddb0555dbf9b2ac9c03b60",
+      "mimeType": "video/webm",
+      "videoCodec": "VP9",
+      "audioCodec": "Opus",
+      "width": 608,
+      "height": 1080,
+      "durationSeconds": 19.675,
+      "mp4": {
+        "path": "videos/beetle-leaf-1080p.mp4",
+        "bytes": 2674102,
+        "sha256": "fb39786d96fdab82ca5d0855588be05ebe327e098c707a2124f1ad5beda702bd",
+        "videoCodec": "H.264 High@4.1",
+        "audioCodec": "AAC-LC",
+        "pixelFormat": "yuv420p",
+        "frameRate": 30,
+        "durationSeconds": 19.668313,
+        "fastStart": true
+      },
+      "poster": "posters/beetle-leaf.webp",
+      "posterBytes": 10644,
+      "captions": {
+        "zh-CN": "captions/beetle-leaf.zh-CN.vtt",
+        "en": "captions/beetle-leaf.en.vtt"
+      }
+    },
+    {
+      "id": "cloud-water",
+      "source": "videos/cloud-water-1080p.webm",
+      "sourceBytes": 10283715,
+      "sourceSha256": "d5f2d2a17997b2f4351575efe359878e90aeff080ca9df09fc6ac8f2dfef869e",
+      "mimeType": "video/webm",
+      "videoCodec": "VP9",
+      "audioCodec": null,
+      "width": 1920,
+      "height": 1080,
+      "durationSeconds": 22.022,
+      "mp4": {
+        "path": "videos/cloud-water-1080p.mp4",
+        "bytes": 8259146,
+        "sha256": "fd196a8aab3a912b5c253662940204f4b2250187e8e1ddbcb8490f823d921710",
+        "videoCodec": "H.264 High@4.1",
+        "audioCodec": null,
+        "pixelFormat": "yuv420p",
+        "frameRate": 30,
+        "durationSeconds": 22.033333,
+        "fastStart": true
+      },
+      "poster": "posters/cloud-water.webp",
+      "posterBytes": 49730,
+      "captions": {
+        "zh-CN": "captions/cloud-water.zh-CN.vtt",
+        "en": "captions/cloud-water.en.vtt"
+      }
+    },
+    {
+      "id": "lettuce-sprout",
+      "source": "videos/lettuce-sprout-720p.webm",
+      "sourceBytes": 4849480,
+      "sourceSha256": "12cf7d7155e5ee02b426cdb94b922870e59ec942dd39c1f97a53cd19da19d218",
+      "mimeType": "video/webm",
+      "videoCodec": "VP8",
+      "audioCodec": null,
+      "width": 1280,
+      "height": 720,
+      "durationSeconds": 18.919,
+      "mp4": {
+        "path": "videos/lettuce-sprout-720p.mp4",
+        "bytes": 3787348,
+        "sha256": "742e4488de2dabb65233123fb89fdd6f1ced12e12e0447b2e3891da637d6599b",
+        "videoCodec": "H.264 High@4.1",
+        "audioCodec": null,
+        "pixelFormat": "yuv420p",
+        "frameRate": 30,
+        "durationSeconds": 18.933333,
+        "fastStart": true
+      },
+      "poster": "posters/lettuce-sprout.webp",
+      "posterBytes": 43002,
+      "captions": {
+        "zh-CN": "captions/lettuce-sprout.zh-CN.vtt",
+        "en": "captions/lettuce-sprout.en.vtt"
+      }
+    },
+    {
+      "id": "moon-sides",
+      "source": "videos/moon-sides-1080p.webm",
+      "sourceBytes": 8803998,
+      "sourceSha256": "9a2cbf866bf18bc4bb1c7ac4fd8edb371485fa32ef4f3514ea2307bb32dee515",
+      "mimeType": "video/webm",
+      "videoCodec": "VP9",
+      "audioCodec": null,
+      "width": 1920,
+      "height": 1080,
+      "durationSeconds": 14.949,
+      "mp4": {
+        "path": "videos/moon-sides-1080p.mp4",
+        "bytes": 4566988,
+        "sha256": "929cf3e27dfa84c390ce2fdb4f8f9a790b0a94cd52eeef6f7f09792740ec7843",
+        "videoCodec": "H.264 High@4.1",
+        "audioCodec": null,
+        "pixelFormat": "yuv420p",
+        "frameRate": 30,
+        "durationSeconds": 14.933333,
+        "fastStart": true
+      },
+      "poster": "posters/moon-sides.webp",
+      "posterBytes": 37496,
+      "captions": {
+        "zh-CN": "captions/moon-sides.zh-CN.vtt",
+        "en": "captions/moon-sides.en.vtt"
+      }
+    },
+    {
+      "id": "moth-flower",
+      "source": "videos/moth-flower-1080p.webm",
+      "sourceBytes": 16309847,
+      "sourceSha256": "dad1529f5f23d2b6260dcc0dc5710e6cdaeea8cf10771e28b45f391b822155af",
+      "mimeType": "video/webm",
+      "videoCodec": "VP9",
+      "audioCodec": "Opus",
+      "width": 608,
+      "height": 1080,
+      "durationSeconds": 32.552,
+      "mp4": {
+        "path": "videos/moth-flower-1080p.mp4",
+        "bytes": 17784927,
+        "sha256": "67efaf6e953f45d806e52ab0a609a62af21131e04dee98d20a3f5e17438b95b4",
+        "videoCodec": "H.264 High@4.1",
+        "audioCodec": "AAC-LC",
+        "pixelFormat": "yuv420p",
+        "frameRate": 30,
+        "durationSeconds": 32.566667,
+        "fastStart": true
+      },
+      "poster": "posters/moth-flower.webp",
+      "posterBytes": 55776,
+      "captions": {
+        "zh-CN": "captions/moth-flower.zh-CN.vtt",
+        "en": "captions/moth-flower.en.vtt"
+      }
+    }
+  ]
+}

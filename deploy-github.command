@@ -55,10 +55,12 @@ fi
 echo "正在启用 GitHub Pages…"
 if gh api "repos/$GITHUB_OWNER/$REPOSITORY_NAME/pages" >/dev/null 2>&1; then
   gh api -X PUT "repos/$GITHUB_OWNER/$REPOSITORY_NAME/pages" \
+    -f build_type=legacy \
     -f 'source[branch]=main' \
     -f 'source[path]=/' >/dev/null
 else
   gh api -X POST "repos/$GITHUB_OWNER/$REPOSITORY_NAME/pages" \
+    -f build_type=legacy \
     -f 'source[branch]=main' \
     -f 'source[path]=/' >/dev/null
 fi
